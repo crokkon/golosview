@@ -1,0 +1,19 @@
+body {
+    background: #F1F1F1;
+}
+
+.op {
+    background: #FFF;
+    padding: 4px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    border: 1px solid #e3e3e3;
+}
+
+.well {
+    background: #FFF;
+}
+
+.card-header-meta {
+    font-size: small;
+}

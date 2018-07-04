@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        {{ error }}
+    </div>
+    <div class="col-lg-12">
+        <div class="card">
+            <h5 class="card-header">
+                <a href="/@{{comment.author}}">@{{comment.author}}</a>/{{comment.permlink}}
+                <div class="float-right card-header-meta">
+                    {{comment.payout}}</small><br/>
+                    <a href="https://golos.io/{{comment.authorperm}}">View on Golos.io</a>
+                </div>
+            </h5>
+            <div class="card-body">
+
+                <!-- <div class="clearfix"></div> -->
+                <h5 class="card-title">{{comment.title}}</h5>
+                {% if comment.parent_author %}
+                <h6 class="card-subtitle text-muted">In reply to <a href="/@{{comment.parent_author}}">@{{comment.parent_author}}</a>/<a href="/@{{comment.parent_author}}/{{comment.parent_permlink}}">{{comment.parent_permlink}}</a></h6>
+                {% endif %}
+                <p class="card-text">
+                    <pre>{{comment.body}}</pre>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <h5 class="card-header">Parameters</h5>
+            <div class="card-body small">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <tbody>
+                            {% autoescape false %}
+                            {{ comment_options }}
+                            {% endautoescape %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <h5 class="card-header">Active votes</h5>
+            <div class="card-body small">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <tbody>
+                            {% autoescape false %}
+                            {{ comment_votes }}
+                            {% endautoescape %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

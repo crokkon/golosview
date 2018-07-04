@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card">
+            <center>
+                <h5 class="card-header">
+                    <img src="{{account.avatar_url}}" alt="{{account.name}}" class="img-fluid"/><br/>
+                    {{ account.name }}
+                </h5>
+            </center>
+            <div class="card-body">
+                <div class="table-responsive small">
+                    <table class="table table-sm">
+                        <tbody>
+                            <tr><td>Name</td><td>{{account.name}}</td></tr>
+                            <tr><td>Golos Power</td><td>{{account.sp}}</td></tr>
+                            <tr><td>Voting Power</td><td>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped" role="progressbar"
+                                         style="width: 100%;"
+                                         aria-valuenow="{{account.voting_power}}"
+                                         aria-valuemin="0"
+                                         aria-valuemax="100">
+                                        {{account.voting_power}}
+                                    </div>
+                                </div>
+                            </td></tr>
+                            <tr><td>Reputation</td><td>{{account.reputation}}</td></tr>
+                            <tr><td>Created</td><td>{{account.created}}</td></tr>
+                            <tr><td>Own shares</td><td>{{account.vesting_shares}}</td></tr>
+                            <tr><td>Delegates shares</td><td>{{account.delegated_vesting_shares}}</td></tr>
+                            <tr><td>Received shares</td><td>{{account.delegated_vesting_shares}}</td></tr>
+                            <tr><td>GOLOS Balance</td><td>{{account.balance}}</td></tr>
+                            <tr><td>GBG Balance</td><td>{{account.sbd_balance}}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <center>
+                    View on: <a href="https://golos.io/@{{account.name}}">golos.io</a><br/>
+                </center>
+            </div>
+        </div>
+    </div>
+
+    <!-- account operations list -->
+    <div class="col-lg-8">
+        {% autoescape false %}
+        {{ optable }}
+        {% endautoescape %}
+    </div>
+
+    <!-- pagination -->
+    <div class="col-lg-12">
+        {% if total_pages %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% for p in range(1, total_pages + 1) %}
+                {% if p == 1 or p == total_pages or (page - 6) < p < (page + 6) %}
+                {% if p == page %}
+                <li class="page-item active">
+                    <span class="page-link">{{p}}
+                    <span class="sr-only">(current)</span>
+                    </span></li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="/@{{account.name}}?page={{p}}">{{p}}</a>
+                </li>
+                {% endif %}
+                {% endif %}
+                {% if p == page - 6 or p == page + 6 %}
+                <li class="page-item">...</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

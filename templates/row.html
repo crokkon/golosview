@@ -1,0 +1,9 @@
+<tr>
+  {% for col in cols %}
+  {% if code == True and cols.index(col) > 0 %}
+  <td><pre>{{col}}</pre></td>
+  {% else %}
+  <td>{{col}}</td>
+  {% endif %}
+  {% endfor %}
+</tr>
